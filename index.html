@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Search</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Search and Filters</h2>
+                <label for="searchTerm">Search by name:</label>
+                <input type="text" id="searchTerm" class="form-control mb-2" placeholder="Search...">
+                <label for="skills">Select skills:</label>
+                <select id="skills" class="form-control mb-2" multiple>
+                    <option value="Python">Python</option>
+                    <option value="JavaScript">JavaScript</option>
+                </select>
+                <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
+            </div>
+            <div class="col-md-8">
+                <h2>Filtered Freelancers</h2>
+                <div id="freelancersList">
+                </div>
+                <h2>Messages</h2>
+                <div id="messages">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <h2>Demo Content</h2>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const freelancers = [
+            { Name: 'Alice', Skills: 'Python, JavaScript', },
+            { Name: 'Bob', Skills: 'Java, C++', },
+            { Name: 'Charlie', Skills: 'HTML, CSS', }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const applyFiltersBtn = document.getElementById('applyFilters');
+            applyFiltersBtn.addEventListener('click', applyFilters);
+            renderFreelancers(freelancers);
+        });
+
+        function applyFilters() {
+            const filteredFreelancers = freelancers; 
+
+            renderFreelancers(filteredFreelancers);
+        }
+
+        function renderFreelancers(freelancers) {
+            const freelancersList = document.getElementById('freelancersList');
+            freelancersList.innerHTML = '';
+
+            freelancers.forEach(freelancer => {
+                const freelancerCard = document.createElement('div');
+                freelancerCard.classList.add('card', 'mb-2');
+                freelancerCard.innerHTML = `
+                    <div class="card-body">
+                        <h3 class="card-title">Name: ${freelancer.Name}</h3>
+                        <p class="card-text">Skills: ${freelancer.Skills}</p>
+                        <!-- Add more fields -->
+                    </div>
+                `;
+                freelancersList.appendChild(freelancerCard);
+            });
+        }
+    </script>
+</body>
+</html>
